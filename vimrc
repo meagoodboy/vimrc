@@ -7,7 +7,7 @@ set showcmd             " show command in bottom bar
 set wildmenu            " visual autocomplete for command menu
 set termguicolors
 set cindent
-se mouse+=v
+set cursorline
 
 " Clipboard shortcuts
 map <C-c> "+y<CR>
@@ -21,10 +21,51 @@ noremap <leader> :wall<CR>:qall!<CR>
 " Use <F1> to force exit all buffers
 noremap <F1> :qall!<CR>
 
-" Press F5 to activate coderunner
-map <F5> :w<CR>:!. ~/.vim/coderunner.sh %:e %:r<CR>
+" Indentguides using listchars
+:set listchars=tab:\│\
+:set list
+:hi SpecialKey ctermfg=236 guifg=grey19
+
+" Legacy coderunner
+map <F8> :w<CR>:!. ~/.vim/coderunner.sh %:e %:r<CR>
+
+" Press F5 to run code
+map <F5> :w<CR>:call RunCode()<CR><C-w><C-w><CR>
+
+function RunCode()
+	if expand('%:e') == "c"
+		:call term_sendkeys(2, "clear && gcc ")
+		:call term_sendkeys(2, expand('%'))
+		:call term_sendkeys(2, " -lm && ./a.out && echo")
+	elseif expand('%:e') == "cpp"
+		:call term_sendkeys(2, "clear && g++ ")
+		:call term_sendkeys(2, expand('%'))
+		:call term_sendkeys(2, " -lm && ./a.out && echo")
+	elseif expand('%:e') == "java"
+		:call term_sendkeys(2, "clear && javac ")
+		:call term_sendkeys(2, expand('%'))
+		:call term_sendkeys(2, " && java ")
+		:call term_sendkeys(2, expand('%:r'))
+		:call term_sendkeys(2, " && echo")
+	elseif expand('%:e') == "py"
+		:call term_sendkeys(2, "clear && python ")
+		:call term_sendkeys(2, expand('%'))
+	endif
+endfunction
 
 colorscheme d4rk
+
+set splitbelow
+set splitright
+if expand('%:e') == "c"
+	vert term ++cols=40 sh
+elseif expand('%:e') == "cpp"
+	vert term ++cols=40 sh
+elseif expand('%:e') == "java"
+	vert term ++cols=40 sh
+elseif expand('%:e') == "py"
+	vert term ++cols=40 sh
+endif
 
 " Autocomplete parentheses
 let g:xptemplate_brace_complete = '([{'
@@ -69,11 +110,6 @@ highlight CursorLine cterm=NONE
 syntax match mySpecialSymbols "+\|-\|\*\|?\|:\|<\|>\|&\||\|!\|\~\|%\|="
 highlight mySpecialSymbols ctermfg=208
 
-" Indentguides using listchars
-:set listchars=tab:\│\ 
-:set list
-:hi SpecialKey ctermfg=236 guifg=grey19
-
 " Better intellisense suggestions colorscheme
 highlight Pmenu ctermbg=238 guibg=#444444
 
@@ -83,6 +119,7 @@ highlight Pmenu ctermbg=238 guibg=#444444
 
 " Recolor cursor line numbers
 :hi CursorLineNr guifg=white 
+:hi SpecialKey ctermfg=236 guifg=grey19
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
