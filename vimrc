@@ -77,6 +77,8 @@ if has("autocmd")
 		autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh | :2
 		autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c | :7
 		autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp | :9
+		autocmd BufNewFile *.java 0r ~/.vim/templates/skeleton.java | s/FILENAME/\=expand("%:t:r")
+		autocmd BufNewFile *.java :3
 	augroup END
 endif
 
