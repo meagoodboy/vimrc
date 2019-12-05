@@ -14,6 +14,7 @@ map <C-c> "+y<CR>
 map <C-v> "+p<CR>
 map <C-x> dd
 map <C-z> u
+map <C-e> :vertical resize 100<CR>
 
 let mapleader = "`"
 " Use ` to save and exit all buffers
