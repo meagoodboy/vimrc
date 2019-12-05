@@ -101,7 +101,7 @@ let g:airline_theme='molokai'
 highlight LineNr ctermfg=242
 
 " Hide end-of-buffer tildes
-highlight EndOfBuffer ctermfg=black ctermbg=black
+highlight EndOfBuffer ctermfg=black ctermbg=black guifg=black guibg=black
 
 " Highlight current line numbers
 highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
