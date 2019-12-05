@@ -129,6 +129,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+" Better looking vertical split lines
+set encoding=utf8
+set fillchars=vert:│
+highlight VertSplit cterm=NONE ctermfg=White ctermbg=NONE
+
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
