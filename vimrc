@@ -8,6 +8,7 @@ set wildmenu            " visual autocomplete for command menu
 set termguicolors
 set cindent
 set cursorline
+set backspace=indent,eol,start
 
 " Clipboard shortcuts
 map <C-c> "+y<CR>
@@ -121,7 +122,7 @@ highlight Pmenu ctermbg=238 guibg=#444444
  hi CursorLine guibg=#161616
 
 " Recolor cursor line numbers
-:hi CursorLineNr guifg=white 
+:hi CursorLineNr guifg=white ctermfg=15 cterm=bold
 :hi SpecialKey ctermfg=236 guifg=grey19
 
 " use <tab> for trigger completion and navigate to the next complete item
