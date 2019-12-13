@@ -11,6 +11,7 @@ set cursorline
 set splitbelow
 set splitright
 set backspace=indent,eol,start
+let delimitMate_expand_cr = 1
 
 " Clipboard shortcuts
 map <C-c> "+y<CR>
