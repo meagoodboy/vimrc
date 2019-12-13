@@ -1,13 +1,15 @@
 set background=dark
-syntax enable           " enable syntax processing
-set tabstop=4       " number of visual spaces per TAB
+syntax enable
+set tabstop=4
 set shiftwidth=4
-set number              " show line numbers
-set showcmd             " show command in bottom bar
-set wildmenu            " visual autocomplete for command menu
+set number
+set showcmd
+set wildmenu
 set termguicolors
 set cindent
 set cursorline
+set splitbelow
+set splitright
 set backspace=indent,eol,start
 
 " Clipboard shortcuts
@@ -57,8 +59,6 @@ endfunction
 
 colorscheme d4rk
 
-set splitbelow
-set splitright
 if expand('%:e') == "c"
 	vert term ++cols=40 sh
 elseif expand('%:e') == "cpp"
@@ -71,7 +71,6 @@ endif
 
 " Autocomplete parentheses
 let g:xptemplate_brace_complete = '([{'
-" enables a DSL (a Domain specific language) for your plugin configurations
 
 " Templates for C, C++ and bash scripts
 if has("autocmd")
@@ -84,16 +83,12 @@ if has("autocmd")
 	augroup END
 endif
 
-
+" Vim-Plug
 call plug#begin('~/.vim/plugged')
-" inside these 'call lines' you can write 'Plug' instructions
-" that specify each plugin you want to install
-
 Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 call plug#end()
 
 " Default Airline to molokai
@@ -118,24 +113,23 @@ highlight mySpecialSymbols ctermfg=208
 highlight Pmenu ctermbg=238 guibg=#444444
 
 " Enable cursorline
- set cursorline
- hi CursorLine guibg=#161616
+set cursorline
+hi CursorLine guibg=#161616
 
 " Recolor cursor line numbers
-:hi CursorLineNr guifg=white ctermfg=15 cterm=bold
-:hi SpecialKey ctermfg=236 guifg=grey19
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+hi CursorLineNr guifg=white ctermfg=15 cterm=bold
+hi SpecialKey ctermfg=236 guifg=grey19
 
 " Better looking vertical split lines
 set encoding=utf8
 set fillchars=vert:│
 highlight VertSplit cterm=NONE ctermfg=White ctermbg=NONE
 
+" Use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
