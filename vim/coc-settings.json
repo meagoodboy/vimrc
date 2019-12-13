@@ -1,4 +1,6 @@
 {
+    "coc.preferences.hoverTarget": "echo",
+	"signature.target": "echo",
     "suggest.autoTrigger": "always",
     "suggest.timeout": 500,
     "languageserver": {
